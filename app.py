@@ -1,12 +1,14 @@
 from flask import Flask, render_template, request
 from routes.api.element import api_element
 from routes.api.wiki import api_wiki
+from routes.api.trend import api_trend
 from flasgger import Swagger
 
 app = Flask(__name__)
 
 app.register_blueprint(api_element, url_prefix='/api')
 app.register_blueprint(api_wiki, url_prefix='/api')
+app.register_blueprint(api_trend, url_prefix='/api')
 
 swagger = Swagger(app)
 
