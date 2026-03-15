@@ -1,0 +1,55 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Delius&family=DynaPuff:wght@400..700&family=Rubik+Bubbles&display=swap');
+@import 'primeicons/primeicons.css';
+
+
+body{
+    background-color: #F5F2F2;
+}
+
+@theme{
+    --font-rubikBubbles : "Rubik Bubbles", system-ui;
+    --font-dynaPuff : "DynaPuff", system-ui;
+    --font-delius: "Delius", cursive;
+
+    --color-ultramarine : #2945a9;
+    --color-amberglow : #fecb78;
+    --color-milk : #fffdf1;
+    --color-cherry: #f43f5e;
+}
+
+@layer components{
+  .btn-base {
+    @apply cursor-pointer transform transition duration-200 ease-out hover:scale-105 active:scale-95 select-none
+  }
+}
+
+.ripple-active {
+  background: #ffe066 !important;
+  color: black !important;
+  transition: all 0.25s ease;
+}
+
+.ripple-active h3 {
+  color: black !important;
+}
+
+.ripple-active img {
+  filter: invert(1);
+}
+
+.droplet-ripple {
+  position: absolute;
+  border-radius: 50%;
+  background: #ffe066;
+  transform: scale(0);
+  animation: droplet 0.6s ease-out forwards;
+  pointer-events: none;
+}
+
+@keyframes droplet {
+  to {
+    transform: scale(3);
+    opacity: 0;
+  }
+}
