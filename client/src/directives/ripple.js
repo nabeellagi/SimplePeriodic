@@ -3,7 +3,7 @@ export default {
     el.style.position = "relative";
     el.style.overflow = "hidden";
 
-    el.addEventListener("click", (e) => {
+    el.addEventListener("mouseenter", (e) => {
       const rect = el.getBoundingClientRect();
       const size = Math.max(rect.width, rect.height);
 

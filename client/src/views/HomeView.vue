@@ -71,15 +71,19 @@ function spinRange() {
     <div class="flex justify-center items-start mt-10 px-6">
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 w-[80vw] max-w-5xl">
         <!-- LEFT BIG CARD -->
-        <div
-          v-ripple
-          class="bg-cherry rounded-2xl p-8 flex flex-col items-center justify-center sm:justify-end sm:row-span-2
-          aspect-square sm:aspect-auto
-          btn-base"
+        <RouterLink 
+          
         >
-          <img v-ripple class="invert-0 pointer-events-none" src="/pt.gif"/>
-          <h3 class="text-4xl sm:text-7xl font-rubikBubbles text-milk mb-4">Periodic Table</h3>
-        </div>
+          <div
+            v-ripple
+            class="bg-cherry rounded-2xl p-8 flex flex-col items-center justify-center sm:justify-end sm:row-span-2
+            aspect-square sm:aspect-auto
+            btn-base"
+          >
+            <img v-ripple class="invert-0 pointer-events-none" src="/pt.gif"/>
+            <h3 class="text-4xl sm:text-7xl font-rubikBubbles text-milk mb-4">Periodic Table</h3>
+          </div>
+        </RouterLink>
 
         <!-- RIGHT TOP -->
         <div
