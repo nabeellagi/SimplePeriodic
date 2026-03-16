@@ -8,6 +8,14 @@ import tailwindcss from '@tailwindcss/vite'
 
 // https://vite.dev/config/
 export default defineConfig({
+  build:{
+    rollupOptions:{
+      input:{
+        main:"index.html",
+        table:"table.html"
+      }
+    }
+  },
   plugins: [
     vue(),
     vueJsx(),

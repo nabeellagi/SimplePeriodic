@@ -28,7 +28,8 @@ function spinRange() {
 
 <template>
   <section
-    class="bg-ultramarine p-6 sm:p-10 flex flex-col justify-center items-center gap-y-4 min-h-[50vh] sm:min-h-screen relative pb-14 scallop-bottom"
+    class="bg-ultramarine p-6 sm:p-10 flex flex-col justify-center items-center gap-y-4 min-h-[50vh] sm:min-h-screen relative pb-14 scallop-bottom
+    border-0"
   >
     <div
       style="background-image: url(&quot;/bganim.gif&quot;)"
@@ -71,22 +72,18 @@ function spinRange() {
     <div class="flex justify-center items-start mt-10 px-6">
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 w-[80vw] max-w-5xl">
         <!-- LEFT BIG CARD -->
-        <RouterLink 
-          
+        <RouterLink to="/periodictable"
+          v-ripple
+          class="bg-cherry rounded-2xl p-8 flex flex-col items-center justify-center sm:justify-end sm:row-span-2
+          aspect-square sm:aspect-auto
+          btn-base"
         >
-          <div
-            v-ripple
-            class="bg-cherry rounded-2xl p-8 flex flex-col items-center justify-center sm:justify-end sm:row-span-2
-            aspect-square sm:aspect-auto
-            btn-base"
-          >
-            <img v-ripple class="invert-0 pointer-events-none" src="/pt.gif"/>
-            <h3 class="text-4xl sm:text-7xl font-rubikBubbles text-milk mb-4">Periodic Table</h3>
-          </div>
+          <img v-ripple class="invert-0 pointer-events-none" src="/pt.gif"/>
+          <h3 class="text-4xl sm:text-7xl font-rubikBubbles text-milk mb-4">Periodic Table</h3>
         </RouterLink>
 
         <!-- RIGHT TOP -->
-        <div
+        <RouterLink
           v-ripple
           class="bg-ultramarine rounded-2xl p-6 flex flex-col items-center justify-center aspect-square
           btn-base"
@@ -95,29 +92,29 @@ function spinRange() {
           <h3 class="text-2xl sm:text-6xl font-rubikBubbles text-milk mb-2 text-center">
             Electron Configuration
           </h3>
-        </div>
+        </RouterLink>
 
         <!-- RIGHT BOTTOM (nested grid) -->
         <div class="grid grid-cols-2 gap-4">
           <!-- Explorer -->
-          <div
+          <RouterLink
             v-ripple
             class="bg-ultramarine rounded-2xl p-6 flex flex-col items-center justify-center aspect-auto sm:aspect-square
             btn-base"
           >
             <img v-ripple class="invert-0 pointer-events-none" src="/eq.gif"/>
             <h3 class="text-2xl sm:text-3xl font-rubikBubbles text-milk mb-1">Reaction Analyzer</h3>
-          </div>
+          </RouterLink>
 
           <!-- Trends -->
-          <div
+          <RouterLink
             v-ripple
             class="bg-ultramarine rounded-2xl p-6 flex flex-col items-center justify-center aspect-auto sm:aspect-square
             btn-base"
           >
             <img v-ripple class="invert-0 pointer-events-none" src="/tr.gif"/>
             <h3 class="text-2xl sm:text-3xl font-rubikBubbles text-milk mb-1">Trends</h3>
-          </div>
+          </RouterLink>
         </div>
       </div>
     </div>
@@ -141,7 +138,7 @@ function spinRange() {
   </section>
 </template>
 
-<style>
+<style scoped>
 .scallop-bottom {
   --r: 40px;
   --gap: 2.5;
