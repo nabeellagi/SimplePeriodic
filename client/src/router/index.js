@@ -1,3 +1,4 @@
+import EconfView from '@/views/EconfView.vue'
 import HomeView from '@/views/HomeView.vue'
 import TableView from '@/views/TableView.vue'
 
@@ -9,6 +10,8 @@ const router = createRouter({
   routes: [
     { path: '/', name: 'home', component: HomeView  },
     { path: '/periodictable', name: 'periodic-table', component: TableView },
+    { path: '/econfig', name: 'electron-configuration', component: EconfView },
+
   ],
 })
 

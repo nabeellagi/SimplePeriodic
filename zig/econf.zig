@@ -48,6 +48,7 @@ const AUFBAU_ORDER = [_]Orbital{
 const NobleGas = struct { symbol: []const u8, z: u32 };
 
 const NOBLE_GASES = [_]NobleGas{
+    .{ .symbol = "Rn", .z = 86 },
     .{ .symbol = "Xe", .z = 54 },
     .{ .symbol = "Kr", .z = 36 },
     .{ .symbol = "Ar", .z = 18 },
@@ -124,12 +125,15 @@ fn subshellLetter(l: u8) u8 {
 }
 
 fn nobleGasForElectrons(electrons: u32) ?NobleGas {
+    var best: ?NobleGas = null;
     for (NOBLE_GASES) |ng| {
-        if (electrons >= ng.z) return ng;
+        if (electrons >= ng.z) {
+            if (best == null or ng.z > best.?.z)
+                best = ng;
+        }
     }
-    return null;
+    return best;
 }
-
 // Build Aufbau filling array.
 // Returns slice length.
 fn aufbauFill(electrons: u32, out: []FilledOrbital) usize {
@@ -182,26 +186,81 @@ fn applyException(filled: []FilledOrbital, exc: *const Exception, len: usize) us
 // Valence electron
 // Highest n s+p electrons for main group. highest (n-1)d + ns for transition.
 
+// fn valenceElectrons(filled: []const FilledOrbital, len: usize) u32 {
+//     var max_n: u8 = 0;
+//     var i: usize = 0;
+//     while (i < len) : (i += 1) {
+//         if (filled[i].electrons > 0 and filled[i].n > max_n)
+//             max_n = filled[i].n;
+//     }
+//     var valence: u32 = 0;
+//     i = 0;
+//     while (i < len) : (i += 1) {
+//         const f = filled[i];
+//         if (f.electrons == 0) continue;
+//         // Outermost s/p
+//         if (f.n == max_n and (f.l == 0 or f.l == 1)) valence += f.electrons;
+//         // (n-1)d for transition metals
+//         if (f.n == max_n - 1 and f.l == 2) valence += f.electrons;
+//     }
+//     return valence;
+// }
+
 fn valenceElectrons(filled: []const FilledOrbital, len: usize) u32 {
     var max_n: u8 = 0;
-    var i: usize = 0;
-    while (i < len) : (i += 1) {
-        if (filled[i].electrons > 0 and filled[i].n > max_n)
-            max_n = filled[i].n;
+    var last_l: u8 = 0;
+
+    // Find outermost shell and last orbital type
+    for (filled[0..len]) |f| {
+        if (f.electrons > 0 and f.n >= max_n) {
+            max_n = f.n;
+            last_l = f.l;
+        }
     }
+
     var valence: u32 = 0;
-    i = 0;
-    while (i < len) : (i += 1) {
-        const f = filled[i];
+
+    for (filled[0..len]) |f| {
         if (f.electrons == 0) continue;
-        // Outermost s/p
-        if (f.n == max_n and (f.l == 0 or f.l == 1)) valence += f.electrons;
-        // (n-1)d for transition metals
-        if (f.n == max_n - 1 and f.l == 2) valence += f.electrons;
+
+        switch (last_l) {
+
+            // s-block
+            0 => {
+                if (f.n == max_n and f.l == 0)
+                    valence += f.electrons;
+            },
+
+            // p-block
+            1 => {
+                if (f.n == max_n and (f.l == 0 or f.l == 1))
+                    valence += f.electrons;
+            },
+
+            // d-block
+            2 => {
+                if (f.n == max_n and f.l == 0)
+                    valence += f.electrons;
+                if (f.n == max_n - 1 and f.l == 2)
+                    valence += f.electrons;
+            },
+
+            // f-block
+            3 => {
+                if (f.n == max_n and f.l == 0)
+                    valence += f.electrons;
+                if (f.n == max_n - 1 and f.l == 2)
+                    valence += f.electrons;
+                if (f.n == max_n - 2 and f.l == 3)
+                    valence += f.electrons;
+            },
+
+            else => {},
+        }
     }
+
     return valence;
 }
-
 /// Write full configuration string into buf, return length.
 /// Sort filled orbitals by (n, l) for display.
 fn writeFull(filled: []const FilledOrbital, len: usize, buf: []u8) usize {
@@ -385,41 +444,58 @@ export fn wasm_output_len() usize {
 }
 
 // TEST
+// pub fn main() !void {
+//     const stdout = std.io.getStdOut().writer();
+
+//     const test_cases = [_]u32{
+//         1, // H
+//         2, // He
+//         6, // C
+//         10, // Ne
+//         18, // Ar
+//         24, // Cr  (exception test)
+//         26, // Fe
+//         29, // Cu  (exception test)
+//         36, // Kr
+//         41, // Nb  (exception test)
+//         42, // Mo  (exception test)
+//         44, // Ru  (exception test)
+//         45, // Rh  (exception test)
+//         46, // Pd  (exception test)
+//         47, // Ag  (exception test)
+//         50, // Sn
+//         54, // Xe
+//         57, // La  (exception test)
+//         58, // Ce  (exception test)
+//         64, // Gd  (exception test)
+//         78, // Pt  (exception test)
+//         79, // Au  (exception test)
+//         80, // Hg
+//         86, // Rn
+//         92, // U   (exception test)
+//         96, // Cm  (exception test)
+//         108,
+//     };
+
+//     for (test_cases) |z| {
+//         try stdout.print("Z = {d} \n", .{z});
+//         compute(z);
+//         try stdout.writeAll(OUTPUT_BUF[0..OUTPUT_LEN]);
+//         try stdout.writeByte('\n');
+//     }
+// }
+
+const builtin = @import("builtin");
+
 pub fn main() !void {
+    if (builtin.target.os.tag == .freestanding) return;
+
     const stdout = std.io.getStdOut().writer();
 
-    const test_cases = [_]u32{
-        1, // H
-        2, // He
-        6, // C
-        10, // Ne
-        18, // Ar
-        24, // Cr  (exception test)
-        26, // Fe
-        29, // Cu  (exception test)
-        36, // Kr
-        41, // Nb  (exception test)
-        42, // Mo  (exception test)
-        44, // Ru  (exception test)
-        45, // Rh  (exception test)
-        46, // Pd  (exception test)
-        47, // Ag  (exception test)
-        50, // Sn
-        54, // Xe
-        57, // La  (exception test)
-        58, // Ce  (exception test)
-        64, // Gd  (exception test)
-        78, // Pt  (exception test)
-        79, // Au  (exception test)
-        80, // Hg
-        86, // Rn
-        92, // U   (exception test)
-        96, // Cm  (exception test)
-        108,
-    };
+    const test_cases = [_]u32{ 1, 2, 6, 10, 18, 24, 26, 29, 36, 41, 42, 44, 45, 46, 47, 50, 54, 57, 58, 64, 78, 79, 80, 86, 92, 96, 108 };
 
     for (test_cases) |z| {
-        try stdout.print("Z = {d} \n", .{z});
+        try stdout.print("Z = {d}\n", .{z});
         compute(z);
         try stdout.writeAll(OUTPUT_BUF[0..OUTPUT_LEN]);
         try stdout.writeByte('\n');
