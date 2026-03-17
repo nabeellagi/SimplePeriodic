@@ -8,7 +8,7 @@ from flasgger import Swagger
 from flask_cors import CORS
 
 app = Flask(__name__)
-CORS(app, origins=["http://localhost:5173"])
+CORS(app, origins=["http://localhost:5173", "http://localhost:4173", "http://192.168.126.196:5173", "http://192.168.126.196:4173"])
 
 app.register_blueprint(api_element, url_prefix='/api')
 app.register_blueprint(api_wiki, url_prefix='/api')
@@ -23,4 +23,4 @@ def index():
     return render_template('index.html')
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', debug=True)
