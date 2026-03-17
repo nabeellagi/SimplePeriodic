@@ -53,3 +53,15 @@ body{
     opacity: 0;
   }
 }
+
+.font-rubikBubbles {
+  font-family: "Rubik Bubbles", system-ui;
+}
+
+.font-dynaPuff {
+  font-family: "DynaPuff", system-ui;
+}
+
+.font-delius {
+  font-family: "Delius", cursive;
+}
