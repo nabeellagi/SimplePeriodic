@@ -98,6 +98,7 @@ function spinRange() {
         <div class="grid grid-cols-2 gap-4">
           <!-- Explorer -->
           <RouterLink
+          to="/reaction"
             v-ripple
             class="bg-ultramarine rounded-2xl p-6 flex flex-col items-center justify-center aspect-auto sm:aspect-square
             btn-base"
