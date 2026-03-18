@@ -19,7 +19,7 @@ const lenis = new Lenis({ autoRaf: true });
       Welcome to
     </h3>
     <h1
-      class="relative z-10 font-rubikBubbles text-milk text-3xl sm:text-9xl tracking-normal text-center leading-tight"
+      class="relative z-10 font-rubikBubbles text-milk sm:text-9xl lg:text-9xl tracking-normal text-center leading-tight"
     >
       Periodic Table
     </h1>

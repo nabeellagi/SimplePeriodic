@@ -39,7 +39,7 @@ function spinRange() {
       Say hi to
     </h3>
     <h1
-      class="font-rubikBubbles text-milk text-7xl sm:text-9xl tracking-normal text-center leading-tight"
+      class="font-rubikBubbles text-milk text-7xl md:text-8xl lg:text-9xl tracking-normal text-center leading-tight"
     >
       Simple<br />Periodic
     </h1>
@@ -79,7 +79,7 @@ function spinRange() {
           btn-base"
         >
           <img v-ripple class="invert-0 pointer-events-none" src="/pt.gif"/>
-          <h3 class="text-4xl sm:text-7xl font-rubikBubbles text-milk mb-4">Periodic Table</h3>
+          <h3 class="text-5xl md:text-6xl lg:text-7xl font-rubikBubbles text-milk mb-4">Periodic Table</h3>
         </RouterLink>
 
         <!-- RIGHT TOP -->
@@ -89,7 +89,7 @@ function spinRange() {
           btn-base"
         >
           <img v-ripple class="invert-0 pointer-events-none" src="/conf.gif"/>
-          <h3 class="text-2xl sm:text-6xl font-rubikBubbles text-milk mb-2 text-center">
+          <h3 class="text-3xl md:text-4xl lg:text-5xl font-rubikBubbles text-milk mb-2 text-center">
             Electron Configuration
           </h3>
         </RouterLink>
@@ -100,11 +100,11 @@ function spinRange() {
           <RouterLink
           to="/reaction"
             v-ripple
-            class="bg-ultramarine rounded-2xl p-6 flex flex-col items-center justify-center aspect-auto sm:aspect-square
+            class="bg-ultramarine rounded-2xl p-6 flex flex-col items-center justify-center aspect-auto md:aspect-square
             btn-base"
           >
             <img v-ripple class="invert-0 pointer-events-none" src="/eq.gif"/>
-            <h3 class="text-2xl sm:text-3xl font-rubikBubbles text-milk mb-1">Reaction Analyzer</h3>
+            <h3 class="text-2xl md:text-3xl lg:text-4xl font-rubikBubbles text-milk mb-1">Reaction Analyzer</h3>
           </RouterLink>
 
           <!-- Trends -->
@@ -115,7 +115,7 @@ function spinRange() {
             btn-base"
           >
             <img v-ripple class="invert-0 pointer-events-none" src="/tr.gif"/>
-            <h3 class="text-2xl sm:text-3xl font-rubikBubbles text-milk mb-1">Trends</h3>
+            <h3 class="text-2xl md:text-3xl lg:text-4xl font-rubikBubbles text-milk mb-1">Trends</h3>
           </RouterLink>
         </div>
       </div>

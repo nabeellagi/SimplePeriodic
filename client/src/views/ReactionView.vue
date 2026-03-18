@@ -48,7 +48,7 @@ async function analyzeReaction() {
       Welcome to
     </h3>
     <h1
-      class="relative z-10 font-rubikBubbles text-milk text-3xl sm:text-9xl tracking-normal text-center leading-tight"
+      class="relative z-10 font-rubikBubbles text-milk text-3xl sm:text-6xl lg:text-8xl  tracking-normal text-center leading-tight"
     >
       Reaction <br />
       Analyzer
