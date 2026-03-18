@@ -8,11 +8,11 @@ const lenis = new Lenis({
 });
 
 const rangeRef = ref(null)
-const rangeSprite = ref("/range/range (9).png")
+const rangeSprite = ref("/range/range9.png")
 
 function spinRange() {
   // change sprite
-  rangeSprite.value = "/range/range (8).png"
+  rangeSprite.value = "/range/range8.png"
 
   // spin animation
   gsap.to(rangeRef.value, {
@@ -20,7 +20,7 @@ function spinRange() {
     duration: 1.2,
     ease: "power2.inOut",
     onComplete: () => {
-      rangeSprite.value = "/range/range (9).png"
+      rangeSprite.value = "/range/range9.png"
     }
   })
 }

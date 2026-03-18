@@ -1,3 +1,4 @@
+import { API_BASE } from "@/utils/api";
 import { el, mount, setChildren } from "redom";
 
 function safe(val) {
@@ -83,7 +84,7 @@ class ModalInfo {
   async loadElement(symbol) {
     try {
       const res = await fetch(
-        `http://192.168.126.196:5000/api/element?symbol=${symbol}`,
+        `${API_BASE}/api/element?symbol=${symbol}`,
       );
 
       const data = await res.json();

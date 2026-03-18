@@ -354,6 +354,8 @@ fn writeCondensed(filled: []const FilledOrbital, len: usize, electrons: u32, buf
     return pos;
 }
 
+// ION
+
 /// Output buffer (?)
 var OUTPUT_BUF: [4096]u8 = undefined;
 var OUTPUT_LEN: usize = 0;
