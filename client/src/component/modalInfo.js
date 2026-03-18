@@ -83,9 +83,7 @@ class ModalInfo {
 
   async loadElement(symbol) {
     try {
-      const res = await fetch(
-        `${API_BASE}/api/element?symbol=${symbol}`,
-      );
+      const res = await fetch(`${API_BASE}/api/element?symbol=${symbol}`);
 
       const data = await res.json();
 
@@ -123,7 +121,9 @@ class ModalInfo {
         row("Discoverers", safe(data.discoverers)),
       ];
 
-      setChildren(this.content, rows);
+      const wiki = await this.loadWiki(data.name);
+
+      setChildren(this.content, [...rows, wiki]);
     } catch (err) {
       setChildren(this.content, [
         el(
@@ -132,6 +132,26 @@ class ModalInfo {
           "Failed to load element data.",
         ),
       ]);
+    }
+  }
+
+  async loadWiki(name) {
+    try {
+      const res = await fetch(
+        `${API_BASE}/api/wiki?element=${encodeURIComponent(name)}`,
+      );
+
+      if (!res.ok) throw new Error("Wiki fetch failed");
+
+      const data = await res.json();
+
+      return wikiBlock(data.title, data.summary, data.url);
+    } catch (err) {
+      return el(
+        "div",
+        { className: "text-gray-400 text-sm font-delius pt-4" },
+        "No additional information available.",
+      );
     }
   }
 
@@ -169,4 +189,31 @@ const modalInstance = new ModalInfo();
 
 export function openInfo(symbol) {
   modalInstance.open(symbol);
+}
+
+function wikiBlock(title, summary, url) {
+  return el("div", { className: "pt-4 space-y-2" }, [
+    el(
+      "div",
+      { className: "font-bold text-gray-800 font-dynaPuff text-lg" },
+      "About",
+    ),
+
+    el(
+      "p",
+      { className: "text-gray-700 font-delius text-sm leading-relaxed" },
+      summary,
+    ),
+
+    el(
+      "a",
+      {
+        href: url,
+        target: "_blank",
+        className:
+          "text-blue-500 hover:underline text-sm font-dynaPuff inline-block mt-1",
+      },
+      "Read more on Wikipedia →",
+    ),
+  ]);
 }
