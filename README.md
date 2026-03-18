@@ -39,7 +39,7 @@
 
 ---
 
-## 📦 Installation (Quick Start)
+## Installation (Quick Start)
 
 ### 1. Clone the repository
 
@@ -62,7 +62,7 @@ python app.py
 
 ---
 
-## ⚙️ Project Structure
+## Project Structure
 
 ```
 SimplePeriodic/
@@ -173,6 +173,18 @@ SimplePeriodic is designed to make chemistry:
 * Easy to understand
 
 Especially for high school students who need quick and reliable tools without unnecessary complexity.
+
+---
+
+## Screenshots
+
+<p align="center">
+  <img src="footages/img1.png" width="80%" />
+  <img src="footages/img2.png" width="80%" />
+  <img src="footages/img3.png" width="80%" />
+  <img src="footages/img4.png" width="80%" />
+  <img src="footages/img5.png" width="80%" />
+</p>
 
 ---
 
