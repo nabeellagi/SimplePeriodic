@@ -1,4 +1,5 @@
 <script setup>
+import { API_BASE } from "@/utils/api";
 import Lenis from "lenis";
 import { ref } from "vue";
 
@@ -16,7 +17,7 @@ async function analyzeReaction() {
   error.value = null;
 
   try {
-    const url = `http://127.0.0.1:5000/api/reaction?eq=${encodeURIComponent(
+    const url = `${API_BASE}/api/reaction?eq=${encodeURIComponent(
       equation.value,
     )}`;
 

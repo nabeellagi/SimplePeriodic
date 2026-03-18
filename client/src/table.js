@@ -1,5 +1,6 @@
 import kaplay from "kaplay";
 import { openInfo } from "./component/modalInfo";
+import { API_BASE } from "./utils/api";
 
 const canvas = document.getElementById("table");
 
@@ -18,7 +19,7 @@ const ELEMENT_CATEGORY_COLORS = {
 
 // GET DATA
 async function fetchElements() {
-  const res = await fetch("http://192.168.126.196:5000/api/get-all");
+  const res = await fetch(`${API_BASE}/api/get-all`);
 
   if (!res.ok) {
     throw new Error("Failed to fetch elements");

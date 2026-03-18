@@ -109,6 +109,7 @@ function spinRange() {
 
           <!-- Trends -->
           <RouterLink
+            to="/trends"
             v-ripple
             class="bg-ultramarine rounded-2xl p-6 flex flex-col items-center justify-center aspect-auto sm:aspect-square
             btn-base"

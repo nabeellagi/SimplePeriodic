@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "chart.js": "^4.5.1",
     "gsap": "^3.14.2",
     "kaplay": "^3001.0.19",
     "lenis": "^1.3.18",
